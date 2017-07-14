@@ -1,17 +1,17 @@
 // ==UserScript==
 // @name SoundCloud hide reposts
 // @namespace http://abs.ezw.me
-// @version 1.0
+// @version 1.2
 // @author ABS
-// @description Only new songs by followed artists in your stream.
+// @description Only see new songs in your SoundCloud stream
 // @match *://soundcloud.com/stream
-// @require http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js
 // ==/UserScript==
-(
-    function(){
-        function norepost(){
-            $(".soundList__item:has('.sc-ministats-reposts')").remove();
-        }
-        window.addEventListener("DOMNodeInserted",norepost, false);
-    }
-)();
+
+function norepost(){
+	for (let repost of document.getElementsByClassName("soundList__item")) {
+		if (repost.getElementsByClassName("sc-ministats-reposts").length > 0)
+			repost.remove();
+            console.log(repost);
+	}
+}
+window.addEventListener("DOMNodeInserted", norepost, false);
